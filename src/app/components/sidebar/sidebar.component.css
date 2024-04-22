@@ -1,0 +1,7 @@
+a{
+    text-decoration: none;
+}
+a:hover {
+    color: rgb(69, 25, 191);
+    font-weight: bold;
+}

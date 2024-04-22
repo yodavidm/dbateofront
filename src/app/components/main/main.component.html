@@ -1,11 +1,14 @@
 <!-- main.component.html -->
-<div class="main">
-  <h2>Últimas publicaciones</h2>
-  <div *ngFor="let publicacion of publicaciones" class="card mb-3">
+<div class="main" style="color: #343a40;">
+  <div class="crear" style="display: flex; justify-content: space-between;">
+    <h3>Últimas publicaciones</h3>
+    <a routerLink="/crear-publicacion" class="btn btn-info btn-sm">Crear publicación</a>
+  </div>
+  <div *ngFor="let publicacion of publicaciones" class="card mb-3" style="padding: 5px;margin-top: 18px;">
     <div class="card-body">
-      <h5 class="card-title">{{ publicacion.titulo }}</h5>
-      <p class="card-text">{{ publicacion.contenido }}</p>
-      <a href="#" class="btn btn-primary">Ver comentarios</a>
+      <h4 class="card-title">{{ publicacion.titulo }}</h4>
+      <p class="card-text">{{ publicacion.contenido }}</p> <a href="#" class="btn btn-warning btn-sm">Ver
+        comentarios</a>
     </div>
   </div>
 </div>

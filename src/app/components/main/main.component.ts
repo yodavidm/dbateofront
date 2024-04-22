@@ -8,13 +8,12 @@ import { Publicacion } from 'src/app/publicacion';
 })
 export class MainComponent {
   publicaciones = [
-    { titulo: 'Publicación 1', contenido: '' },
+    { titulo: 'Que juego me recomiendan???', contenido: 'Soy nuevo en el foro amigooos' },
     { titulo: 'Publicación 2', contenido: 'Contenido de la publicación 2 ' },
     { titulo: 'Publicación 3', contenido: 'Contenido de la publicación 3' },
     { titulo: 'Publicación 1', contenido: 'Contenido de la publicación 1' },
     { titulo: 'Publicación 2', contenido: 'Contenido de la publicación 2' },
-    
-    // Agrega más publicaciones según necesites
+
   ];
   
 

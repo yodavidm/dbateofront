@@ -2,13 +2,17 @@
 <div class="main" style="color: #343a40;">
   <div class="crear" style="display: flex; justify-content: space-between;">
     <h3>Últimas publicaciones</h3>
-    <a routerLink="/crear-publicacion" class="btn btn-info btn-sm">Crear publicación</a>
+    <button class="btn btn-info btn-sm" routerLink="/crear-publicacion">Crear publicación</button>
   </div>
-  <div *ngFor="let publicacion of publicaciones" class="card mb-3" style="padding: 5px;margin-top: 18px;">
-    <div class="card-body">
-      <h4 class="card-title">{{ publicacion.titulo }}</h4>
-      <p class="card-text">{{ publicacion.contenido }}</p> <a href="#" class="btn btn-warning btn-sm">Ver
-        comentarios</a>
+  <div *ngIf="publicaciones && publicaciones.length > 0">
+    <div *ngFor="let publicacion of publicaciones.reverse() | paginate:{itemsPerPage:5,currentPage:page}" class="card mb-3" style="padding: 5px;margin-top: 18px;">
+        <div class="card-body">
+            <h4 class="card-title">{{ publicacion.titulo }}</h4>
+            <p style="color: rgb(101, 110, 122);">Publicado por: {{ publicacion.usuario.nickname }} - Fecha de creación: {{ publicacion.fecha_creacion }}</p>
+            <p class="card-text">{{ publicacion.contenido }}</p>
+            <a href="#" class="btn btn-outline-dark btn-sm" style="margin-right: 20px;">Comentar</a>
+            <a href="#" class="btn btn-warning btn-sm">Ver comentarios</a>
+        </div>
     </div>
-  </div>
 </div>
+<pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>

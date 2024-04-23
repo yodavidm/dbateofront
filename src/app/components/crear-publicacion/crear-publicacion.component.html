@@ -1,12 +1,23 @@
-<form (ngSubmit)="submitForm()" #publicacionForm="ngForm">
-    <div class="form-group">
-      <label for="titulo">Título:</label>
-      <input type="text" class="form-control" id="titulo" name="titulo" required [(ngModel)]="publicacion.titulo" #titulo="ngModel">
-    </div>
-    <div class="form-group">
-      <label for="contenido">Contenido:</label>
-      <textarea class="form-control" id="contenido" name="contenido" rows="5" required [(ngModel)]="publicacion.contenido" #contenido="ngModel"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary" [disabled]="publicacionForm.invalid">Crear Publicación</button>
-  </form>
+<form (ngSubmit)="submitForm()" #publicacionForm="ngForm" style="padding: 20px;color: #343a40;">
+  <div class="form-group">
+    <label for="titulo">
+      <h5>Título</h5>
+    </label>
+    <input type="text" class="form-control" id="titulo" name="titulo" required [(ngModel)]="publicacion.titulo"
+      #titulo="ngModel">
+  </div>
+  <div class="form-group">
+    <label for="contenido">
+      <h5>Contenido</h5>
+    </label>
+    <textarea class="form-control" id="contenido" name="contenido" rows="5" required [(ngModel)]="publicacion.contenido"
+      #contenido="ngModel" style="resize: none;"></textarea>
+  </div>
+  <div class="form-group">
+    <select class="form-select" id="categoriaSelect" name="categoria" [(ngModel)]="selectedCategoria">
+      <option *ngFor="let categoria of categorias" [value]="categoria.id" [disabled]="categoria.id === 0">{{ categoria.nombre }}</option>
+    </select>
+  </div>
   
+  <button type="submit" class="btn btn-info btn-md" [disabled]="publicacionForm.invalid">Crear Publicación</button>
+</form>

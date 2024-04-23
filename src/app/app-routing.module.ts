@@ -4,7 +4,9 @@ import { MainComponent } from './components/main/main.component';
 import { CrearPublicacionComponent } from './components/crear-publicacion/crear-publicacion.component';
 
 const routes: Routes = [
-  { path: 'crear-publicacion', component: CrearPublicacionComponent },
+  { path: '',redirectTo:"/main", pathMatch:'full'},
+  { path: 'main', component: MainComponent },
+  { path: 'crear-publicacion', component: CrearPublicacionComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

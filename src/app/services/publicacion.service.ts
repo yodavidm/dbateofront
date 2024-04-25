@@ -19,4 +19,8 @@ export class PublicacionService {
   obtenerPublicaciones():Observable<Publicacion[]>{
     return this.http.get<Publicacion[]>(`${this.baseUrl}/publicaciones`);
   }
+
+  eliminarPublicacion(id:number):Observable<void>{
+    return this.http.delete<void>(`${this.baseUrl}/publicaciones/${id}`);
+  }
 }

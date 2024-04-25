@@ -11,14 +11,19 @@ import { PublicacionService } from 'src/app/services/publicacion.service';
 })
 export class CrearPublicacionComponent implements OnInit{
   publicacion: Publicacion = {
+    id:0, 
     titulo: '',
     contenido: '',
     fecha_creacion: new Date(),
     usuario: {
       nickname: '',
-      id: 1
+      id: 4
     },
-    id_usuario: 1,
+    categoria: {
+      nombre: '',
+      id: undefined
+    },
+    id_usuario: 4,
     id_categoria: undefined, // Dejamos id_categoria como undefined al inicio
   };
 
@@ -41,7 +46,8 @@ export class CrearPublicacionComponent implements OnInit{
   selectedCategoria: number = 0; // Variable para almacenar el ID de la categoría seleccionada
 
   submitForm() {
-      this.publicacion.id_categoria = this.selectedCategoria; // Asignamos el ID de la categoría seleccionada
+      this.publicacion.id_categoria = this.selectedCategoria; //esta hecho asi para poder sacar nombre de categoria
+      this.publicacion.categoria.id = this.selectedCategoria; // Asignamos el ID de la categoría seleccionada
       this.publicacionService.crearPublicacion(this.publicacion)
         .subscribe(() => {
           console.log('Publicación creada exitosamente');
@@ -52,5 +58,6 @@ export class CrearPublicacionComponent implements OnInit{
           // Manejar error
         });
     }
+
   }
 

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class PublicacionService {
 
-  private baseUrl = 'http://localhost:8080'; // URL base de tu backend
+  private baseUrl = 'https://dbateorepo-production.up.railway.app'; // URL base de tu backend
 
   constructor(private http: HttpClient) { }
 

@@ -5,7 +5,7 @@
     <button class="btn btn-info btn-sm" routerLink="/crear-publicacion">Crear publicación</button>
   </div>
   <div *ngIf="publicaciones && publicaciones.length > 0">
-    <div *ngFor="let publicacion of publicaciones.reverse() | paginate:{itemsPerPage:5,currentPage:page}" class="card mb-3" style="padding: 5px;margin-top: 18px;">
+    <div *ngFor="let publicacion of publicaciones| paginate:{itemsPerPage:5,currentPage:page}" class="card mb-3" style="padding: 5px;margin-top: 18px;">
         <div class="card-body">
             <h4 class="card-title">{{ publicacion.titulo }}</h4>
             <p style="color: rgb(101, 110, 122);">Publicado por: {{ publicacion.usuario.nickname }} - Fecha de creación: {{ publicacion.fecha_creacion }} | {{publicacion.categoria.nombre}}</p>

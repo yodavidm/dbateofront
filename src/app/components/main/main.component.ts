@@ -34,9 +34,9 @@ export class MainComponent implements OnInit {
   }
 
   //hay que bloquear que un usuario no pueda eliminar una publicacion que no sea la suya
-  eliminarPublicacion(id: number): void {
+  async eliminarPublicacion(id: number): Promise<void> {
     // Mostrar un cuadro de diálogo de confirmación con SweetAlert
-    Swal.fire({
+    const result = await Swal.fire({
       title: '¿Estás seguro?',
       text: "Esta acción eliminará la publicación y no se podrá deshacer más tarde.",
       icon: 'warning',
@@ -45,22 +45,28 @@ export class MainComponent implements OnInit {
       cancelButtonColor: '##3085d6',
       confirmButtonText: 'Eliminar',
       cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Llamar al servicio para eliminar la publicación
-        this.publicacionService.eliminarPublicacion(id)
-          .subscribe(
-            () => {
-              console.log(`Publicación con ID ${id} eliminada correctamente`);
-              // Recargar la página después de eliminar la publicación
-            },
-            error => {
-              console.error('Error al eliminar la publicación:', error);
-            }
-          );
-      }
     });
+  
+    // Verificar la opción seleccionada por el usuario
+    if (result.isConfirmed) {
+      // Llamar al servicio para eliminar la publicación
+      this.publicacionService.eliminarPublicacion(id)
+        .subscribe(
+          () => {
+            console.log(`Publicación con ID ${id} eliminada correctamente`);
+            // Recargar la página después de eliminar la publicación
+            window.location.reload();
+          },
+          error => {
+            console.error('Error al eliminar la publicación:', error);
+          }
+        );
+    } else {
+      // El usuario ha cancelado la acción
+      console.log('La acción ha sido cancelada');
+    }
   }
+  
   
   
 

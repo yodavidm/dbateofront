@@ -53,7 +53,6 @@ export class CrearPublicacionComponent implements OnInit{
           console.log('Publicación creada exitosamente');
           // Manejar publicación exitosa
           this.router.navigate(['main']);
-          window.location.reload();
         }, error => {
           console.error('Error al crear la publicación:', error);
           // Manejar error

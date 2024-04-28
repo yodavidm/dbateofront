@@ -24,14 +24,18 @@ export class MainComponent implements OnInit {
     this.publicacionService.obtenerPublicaciones()
       .subscribe(
         publicaciones => {
-          this.publicaciones = publicaciones;
-          console.log('Publicaciones obtenidas:', publicaciones);
+          // Ordenar las publicaciones por fecha de creación de forma descendente
+          this.publicaciones = publicaciones.sort((a, b) => {
+            return new Date(b.fecha_creacion).getTime() - new Date(a.fecha_creacion).getTime();
+          });
+          console.log('Publicaciones obtenidas:', this.publicaciones);
         },
         error => {
           console.error('Error al obtener las publicaciones:', error);
         }
       );
   }
+  
 
   //hay que bloquear que un usuario no pueda eliminar una publicacion que no sea la suya
   async eliminarPublicacion(id: number): Promise<void> {

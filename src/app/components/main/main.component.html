@@ -8,7 +8,7 @@
     <div *ngFor="let publicacion of publicaciones | paginate:{itemsPerPage:5,currentPage:page}" class="card mb-3" style="padding: 5px;margin-top: 18px;">
         <div class="card-body">
             <h4 class="card-title">{{ publicacion.titulo }}</h4>
-            <p style="color: rgb(101, 110, 122);">Publicado por: {{ publicacion.usuario.nickname }} - Fecha de creación: {{ publicacion.fecha_creacion }} | {{publicacion.categoria.nombre}}</p>
+            <p style="color: rgb(101, 110, 122);">Publicado por: {{ publicacion.usuario.nickname }} - Fecha de creación: {{ publicacion.fecha_creacion | date:'medium' }} | {{publicacion.categoria.nombre}}</p>
             <p class="card-text">{{ publicacion.contenido }}</p>
             <a href="#" class="btn btn-outline-dark btn-sm" style="margin-right: 20px;">Comentar</a>
             <a href="#" class="btn btn-warning btn-sm">Ver comentarios</a>

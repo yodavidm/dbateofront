@@ -53,7 +53,6 @@ export class MainComponent implements OnInit {
             () => {
               console.log(`Publicación con ID ${id} eliminada correctamente`);
               // Recargar la página después de eliminar la publicación
-              window.location.reload();
             },
             error => {
               console.error('Error al eliminar la publicación:', error);

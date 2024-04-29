@@ -8,5 +8,15 @@ import { MainComponent } from '../main/main.component';
 })
 export class SidebarComponent {
 
+  categorias: { id: number, nombre: string }[] = [
+    { id: 1, nombre: 'Deportes' },
+    { id: 2, nombre: 'Tecnología' },
+    { id: 3, nombre: 'Entretenimiento' },
+    { id: 4, nombre: 'Política' },
+    { id: 5, nombre: 'Videojuegos' },
+    { id: 6, nombre: 'Música' },
+    { id: 7, nombre: 'Arte' }
+  ];
+
 
 }

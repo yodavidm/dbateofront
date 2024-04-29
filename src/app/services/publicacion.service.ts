@@ -8,7 +8,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 })
 export class PublicacionService {
 
-  private baseUrl = 'https://dbateofront.vercel.app/'; // URL base de tu backend
+  private baseUrl = 'https://dbateofront.vercel.app'; // URL base de tu backend
 
   constructor(private http: HttpClient) { }
 

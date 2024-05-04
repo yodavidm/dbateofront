@@ -1,0 +1,30 @@
+<div *ngIf="comentarios && comentarios.length>0">
+    <div style="padding: 5px;margin-top: 18px;" class="card mb-3">
+        <div class="card-body">
+            <!--  título de la publicación -->
+            <h2 class="card-title">{{ titulo }}</h2>
+            <p style="color: rgb(101, 110, 122);">Publicado por: {{ nickname }} - Fecha de creación: {{ fecha_creacion |
+                date:'medium' }} | {{categoria}}</p>
+            <p class="card-text">{{ contenido }}</p>
+
+            <h4 style="margin-top: 5vh;">Comentarios de esta publicación</h4>
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <!--   elementos de la lista de comentarios -->
+            <li class="list-group-item" *ngFor="let comentario of comentarios | paginate:{itemsPerPage:4,currentPage:page}"  style="margin-top: 15px;">
+                <!-- contenido de cada comentario -->
+                <h6 style="color: black;">Comentado por: {{ comentario.usuario.nickname }}</h6>
+                <p style="color:rgb(101, 110, 122) ;">Fecha de creación: {{comentario.fecha_creacion | date:'medium'}}</p>
+                <p>{{ comentario.comentario }}</p>
+            </li>
+        </ul>
+    </div>
+    <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+
+</div>
+<!-- mostrar un mensaje en caso de que no haya comentarios -->
+<div *ngIf="comentarios && comentarios.length<=0" style="text-align: center;margin-top: 15vh;">
+    <p>No hay comentarios disponibles para esta publicación.</p>
+</div>
+

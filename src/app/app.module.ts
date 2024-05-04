@@ -11,6 +11,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CrearPublicacionComponent } from './components/crear-publicacion/crear-publicacion.component';
+import { ObtenerComentariosComponent } from './components/obtener-comentarios/obtener-comentarios.component';
+import { CrearComentarioComponent } from './components/crear-comentario/crear-comentario.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { CrearPublicacionComponent } from './components/crear-publicacion/crear-
     SidebarComponent,
     MainComponent,
     CrearPublicacionComponent,
+    ObtenerComentariosComponent,
+    CrearComentarioComponent,
   ],
   imports: [
     BrowserModule,

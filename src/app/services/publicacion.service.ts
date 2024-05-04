@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Publicacion } from '../interfaces/publicacion';
 import { Observable, catchError, throwError } from 'rxjs';
+import { PublicacionDTO } from '../interfaces/publicacion-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class PublicacionService {
 
   constructor(private http: HttpClient) { }
 
-  crearPublicacion(publicacion: Publicacion): Observable<Publicacion> {
-    return this.http.post<Publicacion>(`${this.baseUrl}/publicaciones/crear`, publicacion);
+  crearPublicacion(publicacionDTO: PublicacionDTO): Observable<PublicacionDTO> {
+    return this.http.post<PublicacionDTO>(`${this.baseUrl}/publicaciones/crear`, publicacionDTO);
   }
 
   obtenerPublicaciones():Observable<Publicacion[]>{

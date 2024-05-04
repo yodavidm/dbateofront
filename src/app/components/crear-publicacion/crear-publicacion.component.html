@@ -3,14 +3,14 @@
     <label for="titulo">
       <h5>Título</h5>
     </label>
-    <input type="text" class="form-control" id="titulo" name="titulo" required [(ngModel)]="publicacion.titulo"
+    <input type="text" class="form-control" id="titulo" name="titulo" required [(ngModel)]="publicacionDTO.titulo"
       #titulo="ngModel">
   </div>
   <div class="form-group">
     <label for="contenido">
       <h5>Contenido</h5>
     </label>
-    <textarea class="form-control" id="contenido" name="contenido" rows="5" required [(ngModel)]="publicacion.contenido"
+    <textarea class="form-control" id="contenido" name="contenido" rows="5" required [(ngModel)]="publicacionDTO.contenido"
       #contenido="ngModel" style="resize: none;"></textarea>
   </div>
   <div class="form-group">

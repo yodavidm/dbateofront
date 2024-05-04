@@ -1,0 +1,10 @@
+<form (ngSubmit)="submitComentario()" #comentarioForm="ngForm" style="padding: 20px;color: #343a40;">
+<div class="form-group">
+    <label for="comentario">
+        <h5>Comentario</h5>
+    </label>
+    <input type="text" class="form-control" id="comentario" name="comentario" required [(ngModel)]="comentarioDTO.comentario" #comentario="ngModel">
+</div>
+<button type="submit" class="btn btn-info btn-md" [disabled]="comentarioForm.invalid">Comentar</button>
+
+</form>

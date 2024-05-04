@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Publicacion } from 'src/app/interfaces/publicacion';
 import { PublicacionService } from 'src/app/services/publicacion.service';
@@ -12,7 +12,10 @@ import Swal from 'sweetalert2';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private publicacionService: PublicacionService,private route:ActivatedRoute) { }
+  constructor(private publicacionService: PublicacionService,private route:ActivatedRoute,private router:Router) { }
+
+  publicaciones!: Publicacion[];
+  public page!: number;
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -38,8 +41,6 @@ export class MainComponent implements OnInit {
     );
   }
 
-  publicaciones!: Publicacion[];
-  public page!: number;
 
   obtenerPublicaciones(): void {
     this.publicacionService.obtenerPublicaciones()
@@ -92,10 +93,14 @@ export class MainComponent implements OnInit {
     }
   }
   
+  //mandar id de publicacion al pulsar en comentarios
+  verComentarios(idPublicacion:number):void{
+    this.router.navigate(['/publicacion',idPublicacion,'comentarios']);
+  }
+
+  crearComentario(idPublicacion:number):void{
+    this.router.navigate(['publicacion',idPublicacion,'comentar']);
+  }
   
-  
-
-
-
 
 }

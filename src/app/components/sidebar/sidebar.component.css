@@ -21,10 +21,10 @@ a:hover {
     display: block;
     padding: 5px 10px;
     border-radius: 5px;
-    background-color: #f8f9fa; /* Color de fondo de cada elemento de la lista */
   }
   
   .custom-list li a:hover {
     background-color: #e9ecef; /* Color de fondo cuando se pasa el mouse */
   }
+
   

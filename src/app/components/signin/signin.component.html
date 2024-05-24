@@ -1,0 +1,26 @@
+<div class="text-center card container col-md-3">
+    <div class="mt-5 mb-5">
+      <img class="mb-4" src="../../../assets/images/register.webp" alt="register" width="47">
+      <h1 class="h3 mb-3 fw-normal">Regístrate</h1>
+      <form (ngSubmit)="signIn()">
+        <div class="form-floating" style="margin-bottom: 2vh;">
+            <input type="text" class="form-control" id="nickname" placeholder="nickname" [(ngModel)]="registerDto.nickname" name="nickname" required  pattern="[a-zA-Z]{5,}">
+            <label for="email">Nickname</label>
+          </div>
+        <div class="form-floating" style="margin-bottom: 2vh;">
+          <input type="email" class="form-control" id="email" placeholder="name@example.com" [(ngModel)]="registerDto.email" name="email" required>
+          <label for="email">Email</label>
+        </div>
+        <div class="form-floating mt-1" style="margin-bottom: 3vh;">
+          <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="registerDto.password" name="password" required #passwordInput>
+          <label for="password">Contraseña</label>
+        </div>
+        <div class="form-check mt-2">
+          <input class="form-check-input" type="checkbox" id="showPassword" (change)="mostrarPassword()">
+          <label class="form-check-label" for="showPassword">Mostrar contraseña</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" style="margin-top: 5vh;" type="submit">Registrar</button>
+      </form>
+    </div>
+  </div>
+  

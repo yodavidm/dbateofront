@@ -13,6 +13,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { CrearPublicacionComponent } from './components/crear-publicacion/crear-publicacion.component';
 import { ObtenerComentariosComponent } from './components/obtener-comentarios/obtener-comentarios.component';
 import { CrearComentarioComponent } from './components/crear-comentario/crear-comentario.component';
+import { LoginComponent } from './components/login/login.component';
+import { SigninComponent } from './components/signin/signin.component';
+import { RegistradoComponent } from './components/registrado/registrado.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { VerUsuariosComponent } from './components/ver-usuarios/ver-usuarios.component';
+
 
 @NgModule({
   declarations: [
@@ -24,13 +32,23 @@ import { CrearComentarioComponent } from './components/crear-comentario/crear-co
     CrearPublicacionComponent,
     ObtenerComentariosComponent,
     CrearComentarioComponent,
+    LoginComponent,
+    SigninComponent,
+    RegistradoComponent,
+    PerfilComponent,
+    VerUsuariosComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgxPaginationModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
+    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

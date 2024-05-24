@@ -1,0 +1,19 @@
+<table class="table" style="margin-bottom: 4vh;">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">NICKNAME</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">ACCIÓN</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let usuario of usuarios | paginate:{itemsPerPage:12,currentPage:page}">
+            <td class="col-id">{{usuario.id}}</td>
+            <td>{{usuario.nickname}}</td>
+            <td class="col-em">{{usuario.email}}</td>
+            <td><button class="btn btn-outline-danger btn-sm" (click)="eliminarUsuario(usuario.id)">Eliminar</button></td>
+        </tr>
+    </tbody>
+</table>
+<pagination-controls (pageChange)="page = $event" (pageChange)="cambiarPagina($event)" previousLabel="Anterior" nextLabel="Siguiente" style="text-align: center"></pagination-controls>

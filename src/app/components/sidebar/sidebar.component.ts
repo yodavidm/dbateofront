@@ -15,7 +15,9 @@ export class SidebarComponent {
     { id: 4, nombre: 'Política' },
     { id: 5, nombre: 'Videojuegos' },
     { id: 6, nombre: 'Música' },
-    { id: 7, nombre: 'Arte' }
+    { id: 7, nombre: 'Arte' },
+    { id: 8, nombre: 'Otros' }
+
   ];
 
 

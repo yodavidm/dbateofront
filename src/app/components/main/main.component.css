@@ -1,0 +1,31 @@
+body {
+    margin: 40px;
+}
+
+button {
+    cursor: pointer;
+    outline: 0;
+    transition: background-color 0.3s; /* Transición suave del color de fondo */
+}
+
+#green:hover{
+    color: green;
+}
+
+#green{
+    color: lightslategray;
+}
+
+.boton{
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.card{
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+

@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Publicacion } from '../interfaces/publicacion';
 import { Observable, catchError, throwError } from 'rxjs';
 import { PublicacionDTO } from '../interfaces/publicacion-dto';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PublicacionService {
 
-  private baseUrl = 'https://dbateorepo-production.up.railway.app'; // URL base de tu backend
+  private baseUrl = 'http://localhost:8080'; // URL base del backend
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private authService:AuthService) { }
 
   crearPublicacion(publicacionDTO: PublicacionDTO): Observable<PublicacionDTO> {
-    return this.http.post<PublicacionDTO>(`${this.baseUrl}/publicaciones/crear`, publicacionDTO);
+    // Obtener el token del servicio AuthService
+    const token = this.authService.getToken();
+    // Crear encabezados con el token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    // Enviar solicitud POST con encabezados
+    return this.http.post<PublicacionDTO>(`${this.baseUrl}/publicaciones/crear`, publicacionDTO, { headers });
   }
 
   obtenerPublicaciones():Observable<Publicacion[]>{

@@ -1,0 +1,28 @@
+.card {
+    border-radius: 8px;
+    -webkit-box-shadow: 0 0 5px 0 rgba(43, 43, 43, .1), 0 11px 6px -7px rgba(43, 43, 43, .1);
+    box-shadow: 0 0 5px 0 rgba(43, 43, 43, .1), 0 11px 6px -7px rgba(43, 43, 43, .1);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    background-color: #fff;
+}
+
+.card .card-block {
+    padding: 1.25rem
+}
+
+.btn {
+    border-radius: 2px;
+    text-transform: capitalize;
+    font-size: 15px;
+    padding: 10px 19px;
+    cursor: pointer
+}
+
+.btn-md {
+    padding: 10px 16px;
+    font-size: 15px;
+    line-height: 23px
+}

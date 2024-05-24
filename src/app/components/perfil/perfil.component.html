@@ -1,0 +1,26 @@
+<div class="container d-flex justify-content-center align-items-center" *ngIf="usuario">
+    <div class="profile-card text-center">
+        <div class="profile-header">
+            <img src="../../../assets/images/perfilpic.jpg" alt="Avatar" class="avatar" width="150px"
+                style="border-radius: 20vh;">
+            <h1>{{ usuario.nickname }}</h1>
+        </div>
+        <div class="profile-body">
+            <p><strong>Email:</strong> {{ usuario.email }}</p>
+            <p><strong>Fecha de Registro:</strong> {{ usuario.fechaRegistro | date }}</p>
+
+            <button class="btn btn-primary" (click)="obtenerSeguidos(usuario)" >Seguidos</button>
+            <button class="btn btn-primary" (click)="obtenerSeguidores(usuario)" style="margin-left: 2vh;">Seguidores</button>
+
+            <button class="btn btn-dark m-2" *ngIf="esAdmin && estaEnPerfilAdmin()" (click)="obtenerTodosLosUsuarios()"
+                routerLink="/perfil/admin/verUsuarios">ADMINISTRAR USUARIOS</button>
+
+            <div>
+                <button class="btn btn-dark m-2" *ngIf="esAdmin && estaEnPerfilAdmin()"
+                    (click)="generaInformeUsuarios()">INFORME USUARIOS</button>
+                <button class="btn btn-dark m-2" *ngIf="esAdmin && estaEnPerfilAdmin()"
+                    (click)="generaInformePublicaciones()">INFORME PUBLICACIONES</button>
+            </div>
+        </div>
+    </div>
+</div>

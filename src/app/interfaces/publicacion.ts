@@ -10,4 +10,6 @@ export interface Publicacion {
     usuario: Usuario; 
     categoria:Categoria;
     comentario?:Comentario;
+    estaSiguiendo?: boolean;
+
 }

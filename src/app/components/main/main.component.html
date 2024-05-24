@@ -1,20 +1,75 @@
 <!-- main.component.html -->
-<div class="main" style="color: #343a40;">
-  <div class="crear" style="display: flex; justify-content: space-between;">
-    <h3>Últimas publicaciones</h3>
-    <button class="btn btn-info btn-sm" routerLink="/crear-publicacion">Crear publicación</button>
-  </div>
-  <div *ngIf="publicaciones && publicaciones.length > 0">
-    <div *ngFor="let publicacion of publicaciones | paginate:{itemsPerPage:8,currentPage:page}" class="card mb-3" style="padding: 5px;margin-top: 18px;">
-        <div class="card-body">
-            <h4 class="card-title">{{ publicacion.titulo }}</h4>
-            <p style="color: rgb(101, 110, 122);">Publicado por: {{ publicacion.usuario.nickname }} - Fecha de creación: {{ publicacion.fecha_creacion | date:'medium' }} | {{publicacion.categoria.nombre}}</p>
-            <p class="card-text">{{ publicacion.contenido }}</p>
-            <a (click)="crearComentario(publicacion.id)" class="btn btn-outline-dark btn-sm" style="margin-right: 20px;">Comentar</a>
-            <a (click)="verComentarios(publicacion.id)" class="btn btn-warning btn-sm">Ver comentarios</a>
-            <button class="btn btn-danger btn-sm" (click)="eliminarPublicacion(publicacion.id)" style="float: right;">Eliminar</button>
-        </div>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-lg-3">
+      <app-sidebar></app-sidebar>
     </div>
-</div>
+    <div class="col-lg-9">
+      <div class="main" style="color: #343a40;">
+        <div class="crear" style="display: flex; justify-content: space-between;">
+          <a class="boton" (click)="verUltimasPublicaciones()">
+            <h3 style="color: black;">Últimas publicaciones</h3>
+          </a>
+          <button *ngIf="isLoggedIn()" class="btn btn-success btn-sm" routerLink="/crear-publicacion">Crear
+            publicación</button>
+        </div>
+        <div *ngIf="publicaciones && publicaciones.length > 0">
+          <div *ngFor="let publicacion of publicaciones | paginate:{itemsPerPage:8,currentPage:page}" class="card mb-3"
+            style="padding: 5px;margin-top: 18px;">
+            <div class="card-body">
+              <h4 class="card-title"><a style="text-decoration: none;"
+                  [routerLink]="['/perfil',publicacion.usuario.nickname]"><img
+                    src="../../../assets/images/perfilredondo.png" width="30px" alt="perfil"
+                    style="margin-right: 2vh;"></a>{{ publicacion.titulo }}
 
-<pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                <!--BOTON SI NO ESTA SEGUIDO-->
+                <button *ngIf="isLoggedIn() && !publicacion.estaSiguiendo" class="btn btn-outline-primary btn-sm"
+                  style="margin-left: 2vh;padding: 2px 5px; font-size: 12px;padding-right: 10px;"
+                  (click)="seguir(seguidor,publicacion);">+ Seguir</button>
+
+                <!--BOTON SI  ESTA SEGUIDO-->
+                <button *ngIf="isLoggedIn() && publicacion.estaSiguiendo" class="btn btn-primary btn-sm" (click)="dejarDeSeguir(publicacion)"
+                  style="margin-left: 2vh;padding: 2px 5px; font-size: 12px;padding-right: 10px;">Siguiendo</button>
+              </h4>
+
+              <!--Si no esta logeado-->
+              <p *ngIf="!isLoggedIn()" style="color: rgb(101, 110, 122);">Publicado por: {{ publicacion.usuario.nickname
+                }} - Fecha de creación: {{ publicacion.fecha_creacion | date:'medium' }} |
+                {{publicacion.categoria.nombre}}</p>
+
+              <!--Si  esta logeado-->
+              <p *ngIf="isLoggedIn()" style="color: rgb(101, 110, 122);">Publicado por: <a
+                  style="text-decoration: none;" [routerLink]="['/perfil',publicacion.usuario.nickname]">{{
+                  publicacion.usuario.nickname }}
+                </a> - Fecha de creación: {{ publicacion.fecha_creacion | date:'medium'
+                }} | {{publicacion.categoria.nombre}}</p>
+              <p class="card-text">{{ publicacion.contenido }}</p>
+
+              <a *ngIf="isLoggedIn()" (click)="crearComentario(publicacion.id)" class="btn btn-outline-dark btn-sm"
+                style="margin-right: 20px;">Comentar</a>
+
+              <a (click)="verComentarios(publicacion.id)" class="btn btn-warning btn-sm" style="margin-right: 20px;">Ver
+                comentarios</a>
+
+              <button style="color: grey;" class="btn" id="green"><i class="fa fa-thumbs-up fa-lg"
+                  aria-hidden="true"></i></button>
+
+              <!--COMRPOBAR SI ES ADMIN-->
+              <button *ngIf="isLoggedIn() && esAdmin" class="btn btn-outline-danger btn-sm"
+                (click)="eliminarPublicacion(publicacion.id)" style="float: right;">Eliminar</button>
+
+              <!--COMRPOBAR SI NO ADMIN-->
+              <button *ngIf="isLoggedIn() && esMiPublicacionPropia(publicacion) && !esAdmin"
+                class="btn btn-outline-danger btn-sm" (click)="eliminarPublicacion(publicacion.id)"
+                style="float: right;">Eliminar</button>
+            </div>
+          </div>
+          <div *ngIf="publicaciones && publicaciones.length <0">No hay publicaciones disponibles.</div>
+        </div>
+
+        <pagination-controls (pageChange)="page = $event" (pageChange)="cambiarPagina($event)" previousLabel="Anterior"
+          nextLabel="Siguiente"></pagination-controls>
+
+      </div>
+    </div>
+  </div>

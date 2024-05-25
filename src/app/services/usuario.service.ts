@@ -13,8 +13,8 @@ export class UsuarioService {
 
   constructor(private http: HttpClient, private authService: AuthService,private comentarioService:ComentarioService) { }
 
-  private baseUrl = 'http://localhost:8080'; // URL base del backend
-
+  private baseUrl = 'https://dbateorepo-production.up.railway.app';
+  
   obtenerTodosLosUsuarios(): Observable<Usuario[]> {
     // Obtener el token del servicio AuthService
     const token = this.authService.getToken();

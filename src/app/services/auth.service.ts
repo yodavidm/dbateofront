@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private http:HttpClient) { }
 
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'https://dbateorepo-production.up.railway.app';
 
     // Método para verificar si el usuario está autenticado
     isLoggedIn(): boolean {

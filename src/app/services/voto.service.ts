@@ -10,8 +10,8 @@ export class VotoService {
 
   constructor(private http: HttpClient) { }
 
-  private baseUrl = 'http://localhost:8080';
-
+  private baseUrl = 'https://dbateorepo-production.up.railway.app';
+  
   votarPositivo(voto: VotoDTO): Observable<VotoDTO> {
     return this.http.post<VotoDTO>(`${this.baseUrl}/votos/votar`, voto); // Enviar el voto positivo al backend
   }

@@ -10,8 +10,8 @@ export class SigninService {
 
   constructor(private http:HttpClient) { }
 
-  private baseUrl = 'http://localhost:8080'; //url back
-
+  private baseUrl = 'https://dbateorepo-production.up.railway.app';
+  
   signin(registerDto:RegisterDTO):Observable<RegisterDTO>{
     return this.http.post<RegisterDTO>(`${this.baseUrl}/auth/register`,registerDto);
   }

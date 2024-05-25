@@ -33,10 +33,10 @@ export class UsuarioService {
   }
 
   seguirUsuario(seguidor:SeguidorDTO):Observable<SeguidorDTO>{
-    const token = this.authService.getToken();
+    //const token = this.authService.getToken();
     // Crear encabezados con el token
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<SeguidorDTO>(`${this.baseUrl}/seguidores/seguir`,seguidor,{headers})
+    //const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<SeguidorDTO>(`${this.baseUrl}/seguidores/seguir`,seguidor)
   }
 
   dejarDeSeguir(idSeguidor: number, idSeguido: number): Observable<void> {

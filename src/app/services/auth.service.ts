@@ -13,6 +13,7 @@ export class AuthService {
 
   private baseUrl = 'https://dbateorepo-production.up.railway.app';
 
+
     // Método para verificar si el usuario está autenticado
     isLoggedIn(): boolean {
       const token = localStorage.getItem('token');

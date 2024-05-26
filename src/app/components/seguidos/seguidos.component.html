@@ -1,0 +1,29 @@
+<div class="row" style="text-align: center;">
+    <h2>Seguidos</h2>
+    <div class="col-md-4" *ngFor="let seguido of seguidos | paginate:{itemsPerPage:6,currentPage:page}">
+      <div class="card" style="margin: 10px;">
+        <div class="card-body">
+          <h5 class="card-title">
+            <img src="../../../assets/images/perfilredondo.png" alt="fotoperfil" width="30px" style="margin-right: 2vh;">
+            <a style="text-decoration: none;" [routerLink]="['/perfil', seguido.seguido.nickname]">{{ seguido.seguido.nickname }}</a>
+          </h5>
+          <p class="card-text">{{ seguido.seguido.email }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" *ngIf="seguidos.length === 0" style="text-align:center;margin-bottom: 2vh;">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <img src="../../../assets/images/corazon.svg" width="200px" alt="corazon">
+          <p class="card-text">Aún no has seguido a nadie.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <pagination-controls (pageChange)="page = $event" (pageChange)="cambiarPagina($event)" previousLabel="Anterior"
+      nextLabel="Siguiente" style="text-align: center"></pagination-controls>
+  

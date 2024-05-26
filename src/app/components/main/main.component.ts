@@ -172,18 +172,7 @@ export class MainComponent implements OnInit {
     }
   }
 
-  dejarDeSeguir(publicacion: Publicacion): void {
-    if (!this.usuario) return;
-    this.usuarioService.dejarDeSeguir(this.usuario.id, publicacion.usuario.id).subscribe(
-      () => {
-        console.log(`Has dejado de seguir al usuario con ID: ${publicacion.usuario.id}`);
-        publicacion.estaSiguiendo = false; // Actualizar el estado de seguimiento
-      },
-      error => {
-        console.error('Error al dejar de seguir:', error);
-      }
-    );
-  }
+
 
   verificarSeguimiento(publicacion: Publicacion): void {
     if (!this.usuario) return;
@@ -228,5 +217,6 @@ export class MainComponent implements OnInit {
       );
     }
   }
+
 
 }

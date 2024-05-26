@@ -9,6 +9,8 @@ import { SigninComponent } from './components/signin/signin.component';
 import { RegistradoComponent } from './components/registrado/registrado.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { VerUsuariosComponent } from './components/ver-usuarios/ver-usuarios.component';
+import { SeguidoresComponent } from './components/seguidores/seguidores.component';
+import { SeguidosComponent } from './components/seguidos/seguidos.component';
 
 
 const routes: Routes = [
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: 'registrado', component:RegistradoComponent},
   { path: 'perfil/:nickname', component:PerfilComponent},
   { path: 'perfil/admin/verUsuarios', component:VerUsuariosComponent},
+  { path: 'perfil/:nickname/seguidores', component: SeguidoresComponent },
+  { path: 'perfil/:nickname/seguidos', component: SeguidosComponent },
   { path: '**', redirectTo: "/main" },
 ];
 

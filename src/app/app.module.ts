@@ -20,6 +20,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { VerUsuariosComponent } from './components/ver-usuarios/ver-usuarios.component';
+import { SeguidoresComponent } from './components/seguidores/seguidores.component';
+import { SeguidosComponent } from './components/seguidos/seguidos.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { VerUsuariosComponent } from './components/ver-usuarios/ver-usuarios.com
     RegistradoComponent,
     PerfilComponent,
     VerUsuariosComponent,
+    SeguidoresComponent,
+    SeguidosComponent,
 
   ],
   imports: [

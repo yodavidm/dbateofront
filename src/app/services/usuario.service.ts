@@ -14,7 +14,7 @@ export class UsuarioService {
   constructor(private http: HttpClient, private authService: AuthService,private comentarioService:ComentarioService) { }
 
   private baseUrl = 'https://dbateorepo-production.up.railway.app';
-  
+      
   obtenerTodosLosUsuarios(): Observable<Usuario[]> {
     // Obtener el token del servicio AuthService
     const token = this.authService.getToken();
@@ -38,15 +38,7 @@ export class UsuarioService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post<SeguidorDTO>(`${this.baseUrl}/seguidores/seguir`,seguidor,{headers})
   }
-
-  dejarDeSeguir(idSeguidor: number, idSeguido: number): Observable<void> {
-    const token = this.authService.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.delete<void>(`${this.baseUrl}/seguidores/eliminar/${idSeguidor}/${idSeguido}`, { headers });
-  }
   
-  
-
   obtenerSeguidosPorUsuario(idUsuario: number): Observable<SeguidorDTO[]> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -64,6 +56,7 @@ export class UsuarioService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<boolean>(`${this.baseUrl}/seguidores/verificar/${idSeguidor}/${idSeguido}`, { headers });
   }
+
   
   
 }

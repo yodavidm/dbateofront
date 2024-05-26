@@ -23,12 +23,12 @@
                     style="margin-right: 2vh;"></a>{{ publicacion.titulo }}
 
                 <!--BOTON SI NO ESTA SEGUIDO-->
-                <button *ngIf="isLoggedIn() && !publicacion.estaSiguiendo" class="btn btn-outline-primary btn-sm"
+                <button *ngIf="isLoggedIn() && !publicacion.estaSiguiendo " class="btn btn-outline-primary btn-sm"
                   style="margin-left: 2vh;padding: 2px 5px; font-size: 12px;padding-right: 10px;"
                   (click)="seguir(seguidor,publicacion);">+ Seguir</button>
 
                 <!--BOTON SI  ESTA SEGUIDO-->
-                <button *ngIf="isLoggedIn() && publicacion.estaSiguiendo" class="btn btn-primary btn-sm" (click)="dejarDeSeguir(publicacion)"
+                <button *ngIf="isLoggedIn() && publicacion.estaSiguiendo " class="btn btn-primary btn-sm" 
                   style="margin-left: 2vh;padding: 2px 5px; font-size: 12px;padding-right: 10px;">Siguiendo</button>
               </h4>
 

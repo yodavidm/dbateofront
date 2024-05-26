@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 export class PublicacionService {
 
   private baseUrl = 'https://dbateorepo-production.up.railway.app';
-  
+      
   constructor(private http: HttpClient,private authService:AuthService) { }
 
   crearPublicacion(publicacionDTO: PublicacionDTO): Observable<PublicacionDTO> {

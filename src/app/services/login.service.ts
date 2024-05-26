@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class LoginService {
 
   private baseUrl = 'https://dbateorepo-production.up.railway.app';
-  
+    
   constructor(private http:HttpClient) {}
 
   login(loginDto:LoginDTO):Observable<LoginDTO>{

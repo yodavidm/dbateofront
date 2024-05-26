@@ -11,8 +11,9 @@ import { AuthService } from './auth.service';
 export class ComentarioService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
-  private baseUrl = 'https://dbateorepo-production.up.railway.app';
   
+  private baseUrl = 'https://dbateorepo-production.up.railway.app';
+
   obtenerComentariosPorPublicacion(idPublicacion: number): Observable<Comentario[]> {
     return this.http.get<Comentario[]>(`${this.baseUrl}/comentarios/publicacion/${idPublicacion}`)
   }

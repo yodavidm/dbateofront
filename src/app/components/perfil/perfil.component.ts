@@ -226,23 +226,29 @@ export class PerfilComponent implements OnInit {
   //lgica para manejar seguidos y seguidores 
   
   obtenerSeguidos(usuario: Usuario): void {
-    
     this.usuarioService.obtenerSeguidosPorUsuario(usuario.id)
       .subscribe(
         seguidos => {
           console.log('Seguidos:', seguidos);
+          this.router.navigate([`/perfil/${usuario.nickname}/seguidos`], {
+            state: { seguidos: seguidos }
+          });
         },
         error => {
           console.error('Error al obtener los seguidos:', error);
         }
       );
   }
+  
 
-  obtenerSeguidores(usuario:Usuario):void{
+  obtenerSeguidores(usuario: Usuario): void {
     this.usuarioService.obtenerSeguidoresPorUsuario(usuario.id)
       .subscribe(
         seguidores => {
           console.log('Seguidores:', seguidores);
+          this.router.navigate([`/perfil/${usuario.nickname}/seguidores`], {
+            state: { seguidores: seguidores }
+          });
         },
         error => {
           console.error('Error al obtener los seguidores:', error);

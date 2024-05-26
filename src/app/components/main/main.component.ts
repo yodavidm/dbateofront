@@ -33,7 +33,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserId();
-    this.cargarUsuario();
+    this.cargarUsuarioYVerificarSeguimientos();
     this.isAdmin();
 
     this.route.params.subscribe(params => {
@@ -56,6 +56,7 @@ export class MainComponent implements OnInit {
         this.publicaciones = publicaciones.sort((a, b) => {
           return new Date(b.fecha_creacion).getTime() - new Date(a.fecha_creacion).getTime();
         });
+        this.verificarSeguimientosEnPublicaciones();
       },
       error => {
         console.error('Error obteniendo publicaciones por categoría:', error);
@@ -70,13 +71,7 @@ export class MainComponent implements OnInit {
           this.publicaciones = publicaciones.sort((a, b) => {
             return new Date(b.fecha_creacion).getTime() - new Date(a.fecha_creacion).getTime();
           });
-
-          // Verificar seguimiento para cada publicación
-          this.publicaciones.forEach(publicacion => {
-            this.verificarSeguimiento(publicacion);
-          });
-
-          console.log('Publicaciones obtenidas:', this.publicaciones);
+          this.verificarSeguimientosEnPublicaciones();
         },
         error => {
           console.error('Error al obtener las publicaciones:', error);
@@ -203,6 +198,13 @@ export class MainComponent implements OnInit {
       );
   }
 
+  verificarSeguimientosEnPublicaciones(): void {
+    if (!this.usuario) return;
+    this.publicaciones.forEach(publicacion => {
+      this.verificarSeguimiento(publicacion);
+    });
+  }
+
   getUserId(): void {
     const userId = this.authService.getUserId();
     if (userId !== null) {
@@ -212,11 +214,12 @@ export class MainComponent implements OnInit {
     }
   }
 
-  cargarUsuario(): void {
+  cargarUsuarioYVerificarSeguimientos(): void {
     if (this.idUsuario) {
       this.authService.getUserById(this.idUsuario).subscribe(
         (data: Usuario) => {
           this.usuario = data;
+          this.verificarSeguimientosEnPublicaciones();
           console.log(this.usuario.nickname);
         },
         (error: any) => {

@@ -7,9 +7,19 @@
 body {
   background-color: #FFFFFF;
   background-image: url(assets/images/bg-svg.svg);
-  background-size: contain;
-  
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
+
+@media only screen and (max-width: 767px) {
+  body {
+    background-size: contain; /* Ajusta la imagen para que quepa completamente en la pantalla */
+    background-attachment: scroll; /* Permite que el fondo se desplace con el contenido */
+  }
+}
+
 
 .sidebar {
   padding: 20px;

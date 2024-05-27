@@ -7,9 +7,8 @@
 body {
   background-color: #FFFFFF;
   background-image: url(assets/images/bg-svg.svg);
-  background-size: cover;
+  background-size:contain;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   background-position: center;
 }
 

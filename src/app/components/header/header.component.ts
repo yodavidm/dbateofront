@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/interfaces/usuario';
@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  private logoutTimer: any;
 
   constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {
     this.usuario = {} as Usuario; // Inicialización del usuario
@@ -19,21 +20,19 @@ export class HeaderComponent {
   usuario: Usuario;
   showUsername: boolean = false;
 
-
   ngOnInit(): void {
     if (this.isLoggedIn()) {
       this.getUserId();
       if (this.idUsuario) {
         this.cargarUsuario();
       }
-    };
-
+      this.startLogoutTimer();
+    }
   }
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
-
 
   logout(): void {
     localStorage.removeItem('token');
@@ -47,12 +46,8 @@ export class HeaderComponent {
         // Recargar la página para ver cambios
         location.reload();
       });
-    }, 500); // 0.5segundo  
+    }, 500); // 0.5 segundo  
   }
-
-
-
-
 
   getUserId(): void {
     const userId = this.authService.getUserId();
@@ -61,13 +56,10 @@ export class HeaderComponent {
     }
   }
 
-
-
   cargarUsuario(): void {
     this.authService.getUserById(this.idUsuario).subscribe(
       (data: Usuario) => {
         this.usuario = data;
-
       },
       (error: any) => {
         console.error("Error al obtener los datos de usuario", error);
@@ -75,5 +67,16 @@ export class HeaderComponent {
     );
   }
 
+  private startLogoutTimer(): void {
+    this.logoutTimer = setTimeout(() => {
+      this.logout();
+    }, 5000); // 5 segundos en milisegundos
+  }
 
+  @HostListener('document:click') resetLogoutTimer(): void {
+    if (this.logoutTimer) {
+      clearTimeout(this.logoutTimer);
+    }
+    this.startLogoutTimer();
+  }
 }

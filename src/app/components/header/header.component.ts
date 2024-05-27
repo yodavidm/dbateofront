@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent {
   private logoutTimer: any;
+  private sessionDuration = 5000; // 5 segundos para pruebas
 
   constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {
     this.usuario = {} as Usuario; // Inicialización del usuario
@@ -22,6 +23,7 @@ export class HeaderComponent {
 
   ngOnInit(): void {
     if (this.isLoggedIn()) {
+      this.checkSessionValidity();
       this.getUserId();
       if (this.idUsuario) {
         this.cargarUsuario();
@@ -36,6 +38,7 @@ export class HeaderComponent {
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('sessionStart');
     this.toastr.info('Sesión cerrada con éxito', '', {
       timeOut: 1000
     });
@@ -70,7 +73,7 @@ export class HeaderComponent {
   private startLogoutTimer(): void {
     this.logoutTimer = setTimeout(() => {
       this.logout();
-    }, 5000); // 5 segundos en milisegundos
+    }, this.sessionDuration); // 5 segundos para pruebas
   }
 
   @HostListener('document:click') resetLogoutTimer(): void {
@@ -78,5 +81,18 @@ export class HeaderComponent {
       clearTimeout(this.logoutTimer);
     }
     this.startLogoutTimer();
+  }
+
+  private checkSessionValidity(): void {
+    const sessionStart = localStorage.getItem('sessionStart');
+    if (sessionStart) {
+      const sessionStartTime = new Date(sessionStart).getTime();
+      const currentTime = new Date().getTime();
+      if (currentTime - sessionStartTime > this.sessionDuration) {
+        this.logout();
+      }
+    } else {
+      localStorage.setItem('sessionStart', new Date().toISOString());
+    }
   }
 }

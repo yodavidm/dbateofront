@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/interfaces/usuario';
@@ -19,40 +19,39 @@ export class HeaderComponent {
   usuario: Usuario;
   showUsername: boolean = false;
 
-
   ngOnInit(): void {
     if (this.isLoggedIn()) {
       this.getUserId();
       if (this.idUsuario) {
         this.cargarUsuario();
       }
-    };
-
+    }
   }
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
-
   logout(): void {
-    localStorage.removeItem('token');
+    this.removeToken();
     this.toastr.info('Sesión cerrada con éxito', '', {
       timeOut: 1000
     });
-    // Agregar delay de 0.5 segundos antes de redirigir y recargar la página
     setTimeout(() => {
-      // Redirigir a main
       this.router.navigate(['/main']).then(() => {
-        // Recargar la página para ver cambios
         location.reload();
       });
-    }, 500); // 0.5segundo  
+    }, 500); // 0.5 segundo  
   }
 
+  @HostListener('window:beforeunload', ['$event'])
+  handleBeforeUnload(event: Event): void {
+    this.removeToken();
+  }
 
-
-
+  private removeToken(): void {
+    localStorage.removeItem('token');
+  }
 
   getUserId(): void {
     const userId = this.authService.getUserId();
@@ -61,19 +60,14 @@ export class HeaderComponent {
     }
   }
 
-
-
   cargarUsuario(): void {
     this.authService.getUserById(this.idUsuario).subscribe(
       (data: Usuario) => {
         this.usuario = data;
-
       },
       (error: any) => {
         console.error("Error al obtener los datos de usuario", error);
       }
     );
   }
-
-
 }

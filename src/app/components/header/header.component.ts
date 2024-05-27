@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent {
   private logoutTimer: any;
-  private sessionDuration = 5000; // 5 segundos para pruebas
+  private sessionDuration = 1800000; // 30 minutos en milisegundos
 
   constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {
     this.usuario = {} as Usuario; // Inicialización del usuario
@@ -73,7 +73,7 @@ export class HeaderComponent {
   private startLogoutTimer(): void {
     this.logoutTimer = setTimeout(() => {
       this.logout();
-    }, this.sessionDuration); // 5 segundos para pruebas
+    }, this.sessionDuration); // 30 minutos en milisegundos para producción
   }
 
   @HostListener('document:click') resetLogoutTimer(): void {

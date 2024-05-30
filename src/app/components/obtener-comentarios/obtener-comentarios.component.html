@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <!--  título de la publicación -->
                         <h2 class="card-title"><img src="../../../assets/images/perfilredondo.png" width="70px" alt="perfil" style="margin-right: 2vh;">{{ titulo }}</h2>
-                        <p style="color: rgb(101, 110, 122);">Publicado por: {{ nickname }} - Fecha de creación: {{
+                        <p style="color: rgb(101, 110, 122);">Publicado por: <a style="text-decoration: none;" [routerLink]="['/perfil',nickname]">{{ nickname }}</a> - Fecha de creación: {{
                             fecha_creacion |
                             date:'medium' }} | {{categoria}}</p>
                         <p class="card-text">{{ contenido }}</p>
@@ -28,7 +28,7 @@
                         <li class="list-group-item"
                             *ngFor="let comentario of comentarios | paginate:{itemsPerPage:4,currentPage:page}">
                             <!-- contenido de cada comentario -->
-                            <h6 style="color: black;"><img src="../../../assets/images/perfilredondo.png" width="30px" alt="perfil" style="margin-right: 2vh;">Comentado por: {{ comentario.usuario.nickname }}</h6>
+                            <h6 style="color: black;"><img src="../../../assets/images/perfilredondo.png" width="30px" alt="perfil" style="margin-right: 2vh;">Comentado por: <a style="text-decoration: none;font-weight: normal;" [routerLink]="['/perfil',comentario.usuario.nickname]">{{ comentario.usuario.nickname }}</a></h6>
                             <p style="color:rgb(101, 110, 122);font-size: smaller;">Fecha de creación: {{comentario.fecha_creacion | date:'medium'}}
 
                                 <!--MOSTRAR ELIMINAR SI NO ES ADMIN-->

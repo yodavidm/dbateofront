@@ -30,6 +30,7 @@ export class MainComponent implements OnInit {
   idUsuario!: number;
   hayPublicacionesCategoria!: boolean;
   seguidor: SeguidorDTO = { idSeguidor: 0, idSeguido: 0 };
+  soyYo!:boolean;
 
   ngOnInit(): void {
     this.getUserId();
@@ -217,6 +218,19 @@ export class MainComponent implements OnInit {
       );
     }
   }
+
+  unfollow(publicacion: Publicacion,usuario: Usuario): void {
+    this.usuarioService.eliminarSeguimiento(publicacion.usuario.id,usuario.id).subscribe(
+      () => {
+        console.log('Seguimiento eliminado');
+        location.reload()
+      },
+      error => {
+        console.error('Error al eliminar seguimiento:', error);
+      }
+    );
+  }
+
 
 
 }

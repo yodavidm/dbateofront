@@ -11,34 +11,34 @@ import { SeguidorDTO } from '../interfaces/seguidor';
 })
 export class UsuarioService {
 
-  constructor(private http: HttpClient, private authService: AuthService,private comentarioService:ComentarioService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private comentarioService: ComentarioService) { }
 
   private baseUrl = 'https://dbateorepo-production.up.railway.app';
-      
+
   obtenerTodosLosUsuarios(): Observable<Usuario[]> {
     // Obtener el token del servicio AuthService
     const token = this.authService.getToken();
     // Crear encabezados con el token
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<Usuario[]>(`${this.baseUrl}/user/find-all`,{headers});
+    return this.http.get<Usuario[]>(`${this.baseUrl}/user/find-all`, { headers });
   }
 
-  eliminarUsuario(id:number):Observable<void>{
+  eliminarUsuario(id: number): Observable<void> {
 
 
     const token = this.authService.getToken();
     // Crear encabezados con el token
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.delete<void>(`${this.baseUrl}/user/eliminar/${id}`,{headers});
+    return this.http.delete<void>(`${this.baseUrl}/user/eliminar/${id}`, { headers });
   }
 
-  seguirUsuario(seguidor:SeguidorDTO):Observable<SeguidorDTO>{
+  seguirUsuario(seguidor: SeguidorDTO): Observable<SeguidorDTO> {
     const token = this.authService.getToken();
     // Crear encabezados con el token
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<SeguidorDTO>(`${this.baseUrl}/seguidores/seguir`,seguidor,{headers})
+    return this.http.post<SeguidorDTO>(`${this.baseUrl}/seguidores/seguir`, seguidor, { headers })
   }
-  
+
   obtenerSeguidosPorUsuario(idUsuario: number): Observable<SeguidorDTO[]> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -57,6 +57,12 @@ export class UsuarioService {
     return this.http.get<boolean>(`${this.baseUrl}/seguidores/verificar/${idSeguidor}/${idSeguido}`, { headers });
   }
 
-  
-  
+  eliminarSeguimiento(idSeguido: number,idSeguidor:number): Observable<void> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete<void>(`${this.baseUrl}/seguidores/eliminar/${idSeguido}/${idSeguidor}`,{headers});
+  }
+
+
+
 }

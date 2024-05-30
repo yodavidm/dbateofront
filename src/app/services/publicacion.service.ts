@@ -11,8 +11,8 @@ import { AuthService } from './auth.service';
 export class PublicacionService {
 
   private baseUrl = 'https://dbateorepo-production.up.railway.app';
-      
-  constructor(private http: HttpClient,private authService:AuthService) { }
+
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   crearPublicacion(publicacionDTO: PublicacionDTO): Observable<PublicacionDTO> {
     // Obtener el token del servicio AuthService
@@ -23,11 +23,13 @@ export class PublicacionService {
     return this.http.post<PublicacionDTO>(`${this.baseUrl}/publicaciones/crear`, publicacionDTO, { headers });
   }
 
-  obtenerPublicaciones():Observable<Publicacion[]>{
+  obtenerPublicaciones(): Observable<Publicacion[]> {
     return this.http.get<Publicacion[]>(`${this.baseUrl}/publicaciones`);
   }
 
-  eliminarPublicacion(id:number):Observable<void>{
+  eliminarPublicacion(id: number): Observable<void> {
+    console.log("eliminando" + id);
+    
     return this.http.delete<void>(`${this.baseUrl}/publicaciones/${id}`);
   }
 
@@ -40,5 +42,13 @@ export class PublicacionService {
           return throwError('Error al obtener publicaciones por categoría. Por favor, inténtelo de nuevo más tarde.');
         })
       );
+  }
+
+  obtenerPublicacionesPorNickname(nickname: string): Observable<Publicacion[]> {
+    // Obtener el token del servicio AuthService
+    const token = this.authService.getToken();
+    // Crear encabezados con el token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Publicacion[]>(`${this.baseUrl}/publicaciones/user/${nickname}`, { headers });
   }
 }

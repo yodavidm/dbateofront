@@ -22,6 +22,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { VerUsuariosComponent } from './components/ver-usuarios/ver-usuarios.component';
 import { SeguidoresComponent } from './components/seguidores/seguidores.component';
 import { SeguidosComponent } from './components/seguidos/seguidos.component';
+import { UserPublicacionesComponent } from './components/user-publicaciones/user-publicaciones.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { SeguidosComponent } from './components/seguidos/seguidos.component';
     VerUsuariosComponent,
     SeguidoresComponent,
     SeguidosComponent,
+    UserPublicacionesComponent,
 
   ],
   imports: [

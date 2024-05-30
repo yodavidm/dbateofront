@@ -1,0 +1,43 @@
+<div class="row">
+    <h2 style="text-align: center;">Publicaciones</h2>
+    <div class="col-md-4" *ngFor="let publicacion of publicaciones | paginate:{itemsPerPage:6,currentPage:page}">
+        <div class="card" style="margin: 10px">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <img src="../../../assets/images/perfilredondo.png" alt="fotoperfil" width="30px"
+                        style="margin-right: 2vh;">
+                    <a style="text-decoration: none;"
+                        [routerLink]="['/publicacion',publicacion.id,'comentarios']">{{publicacion.titulo}}</a>
+                    <button *ngIf="esMiPublicacionPropia(publicacion) && !esAdmin" class="btn btn-outline-danger btn-sm"
+                        (click)="eliminarPublicacion(publicacion.id)"
+                        style="float: right;padding: 2px 5px; font-size: 12px">Eliminar
+                    </button>
+                    <button *ngIf="esAdmin" class="btn btn-outline-danger btn-sm"
+                        (click)="eliminarPublicacion(publicacion.id)"
+                        style="float: right;padding: 2px 5px; font-size: 12px">Eliminar
+                    </button>
+
+                </h5>
+                <p style="color: rgb(101, 110, 122);font-size: smaller;">Publicado por: {{ publicacion.usuario.nickname
+                    }} - Fecha de creación: {{ publicacion.fecha_creacion | date:'medium' }} |
+                    {{publicacion.categoria.nombre}}</p>
+                <p class="card-text">{{ publicacion.contenido }}</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="publicaciones.length === 0" style="text-align:center;margin-bottom: 2vh;">
+    <div class="col">
+        <div>
+            <div class="card-body">
+                <img src="../../../assets/images/corazon.svg" width="200px" alt="corazon">
+                <p class="card-text">Aún no hay publicaciones.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<pagination-controls (pageChange)="page = $event" (pageChange)="cambiarPagina($event)" previousLabel="Anterior"
+    nextLabel="Siguiente" style="text-align: center"></pagination-controls>

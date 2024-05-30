@@ -20,6 +20,7 @@ export class SigninComponent {
     email: "",
     password: ""
   }
+  
 
   signIn() {
     if (this.registerDto.nickname === null || this.registerDto.email === null || this.registerDto.password === null) {

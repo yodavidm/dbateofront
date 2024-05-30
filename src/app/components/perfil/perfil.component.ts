@@ -255,6 +255,21 @@ export class PerfilComponent implements OnInit {
         }
       );
   }
+
+  obtenerPublicaciones(usuario:Usuario): void{
+    this.publicacionService.obtenerPublicacionesPorNickname(usuario.nickname)
+      .subscribe(
+        publicaciones => {
+          console.log('Publicaciones:', publicaciones);
+          this.router.navigate([`/perfil/${usuario.nickname}/publicaciones`], {
+            state: { publicaciones: publicaciones }
+          });
+        },
+        error => {
+          console.error('Error al obtener las publicaciones:', error);
+        }
+      );
+  }
   
   
 

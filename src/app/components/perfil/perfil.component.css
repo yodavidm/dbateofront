@@ -1,0 +1,67 @@
+.profile-card {
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    margin-bottom: 20px;
+}
+
+.profile-header .avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.profile-info p {
+    margin: 5px 0;
+}
+
+.profile-actions {
+    margin-top: 20px;
+}
+
+.profile-actions button {
+    margin: 5px;
+    width: 45%; /* Ancho de los botones de acciones */
+}
+
+.profile-actions button.custom {
+    margin: 5px;
+    width: 95%; /* Ancho de los botones de acciones */
+}
+
+.profile-admin-actions {
+    margin-top: 30px;
+}
+
+.profile-admin-actions button {
+    margin: 5px;
+    width: 95%; /* Ancho de los botones de administración */
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.mx-2 {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.d-block {
+    display: block;
+}
+
+.text-center {
+    text-align: center;
+}
+

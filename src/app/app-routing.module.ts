@@ -11,6 +11,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { VerUsuariosComponent } from './components/ver-usuarios/ver-usuarios.component';
 import { SeguidoresComponent } from './components/seguidores/seguidores.component';
 import { SeguidosComponent } from './components/seguidos/seguidos.component';
+import { UserPublicacionesComponent } from './components/user-publicaciones/user-publicaciones.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'perfil/admin/verUsuarios', component:VerUsuariosComponent},
   { path: 'perfil/:nickname/seguidores', component: SeguidoresComponent },
   { path: 'perfil/:nickname/seguidos', component: SeguidosComponent },
+  { path: 'perfil/:nickname/publicaciones', component: UserPublicacionesComponent },
   { path: '**', redirectTo: "/main" },
 ];
 

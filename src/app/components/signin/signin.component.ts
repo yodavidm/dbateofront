@@ -45,10 +45,10 @@ export class SigninComponent {
       } else {
         // Realizar una solicitud HTTP al backend para verificar si el nickname y el email ya existen en la base de datos
         this.http.post<any>('https://dbateorepo-production.up.railway.app/validar', { nickname: this.registerDto.nickname, email: this.registerDto.email }).subscribe({
-          next: (response: any) => {
+          next: (response: any) => { 
             if (response.nicknameExists) {
               this.toastr.error('El nickname ya está en uso. Por favor, elige otro.','',{
-                timeOut:1000
+                timeOut:1000 
               });
             } else if (response.emailExists) {
               this.toastr.error('El email ya está en uso. Por favor, ingresa otro email.','',{

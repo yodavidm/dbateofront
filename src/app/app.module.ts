@@ -23,6 +23,7 @@ import { VerUsuariosComponent } from './components/ver-usuarios/ver-usuarios.com
 import { SeguidoresComponent } from './components/seguidores/seguidores.component';
 import { SeguidosComponent } from './components/seguidos/seguidos.component';
 import { UserPublicacionesComponent } from './components/user-publicaciones/user-publicaciones.component';
+import { NotificacionComponent } from './components/notificacion/notificacion.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { UserPublicacionesComponent } from './components/user-publicaciones/user
     SeguidoresComponent,
     SeguidosComponent,
     UserPublicacionesComponent,
+    NotificacionComponent,
 
   ],
   imports: [

@@ -95,4 +95,6 @@ export class HeaderComponent {
       localStorage.setItem('sessionStart', new Date().toISOString());
     }
   }
+
+  
 }

@@ -4,13 +4,6 @@
       <img src="../../../assets/images/debatelologo.png" width="100px" alt="logo">
     </a>
     
-    <!-- Formulario de búsqueda
-    <form class="form-inline my-2 my-lg-0 mx-auto">
-      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-    </form>
-     -->
-     
     <!-- Botones de login y sign in -->
     <div *ngIf="!isLoggedIn()" class="ml-auto">
       <button class="btn btn-outline-light mr-2 btn-sm" routerLink="/login">Inicia sesión</button>
@@ -23,6 +16,7 @@
         {{usuario.nickname}}
         <img src="../../../assets/images/perfilredondo.png" alt="perfil" width="35px" style="margin-right: 4vh; margin-left: 3vh;">
       </a>
+      <img src="../../../assets/images/notification-bell.png" alt="bell" width="20px" style="margin-right: 4vh; cursor: pointer;" [routerLink]="['notificaciones',usuario.nickname]">
       <button class="btn btn-outline-light btn-sm" (click)="logout()">Cerrar sesión</button>
     </div>
   </div>

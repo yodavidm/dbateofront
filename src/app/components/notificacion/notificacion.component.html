@@ -1,0 +1,27 @@
+<div class="card notifications" style="border: none;">
+    <div class="card-body">
+        <h2 class="card-title">Notificaciones</h2>
+
+        <!-- Div para mostrar si hay notificaciones -->
+        <div *ngIf="notificaciones.length > 0">
+            <button class="btn btn-danger btn-sm mt-2" (click)="eliminarNotis()" style="margin-bottom: 2vh;">Eliminar
+                notificaciones</button>
+            <ul class="list-group" style=" box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);">
+                <li class="list-group-item" *ngFor="let notification of notificaciones">
+                    <div style="display: flex;justify-content: space-between;">
+                        <div>
+                            <img src="../../../assets/images/perfilredondo.png" width="30px" alt=""
+                                style="margin-right: 2vh;">
+                            {{ notification.mensaje }}
+                        </div>
+                        <div style="color: grey;">{{ notification.fechaCreacion | date: 'dd/MM/yyyy HH:mm' }}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Div para mostrar si no hay notificaciones -->
+        <div *ngIf="notificaciones.length === 0">
+            <p>No hay notificaciones.</p>
+        </div>
+    </div>

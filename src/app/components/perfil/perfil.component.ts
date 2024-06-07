@@ -6,8 +6,8 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { PublicacionService } from 'src/app/services/publicacion.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
-
 
 @Component({
   selector: 'app-perfil',
@@ -26,32 +26,46 @@ export class PerfilComponent implements OnInit {
   publicaciones!: Publicacion[];
   seguidos: any[] = [];
   seguidores: any[] = [];
-  
+  esMiPerfil!: boolean;
+  nicknameLogeado: string = '';
 
   ngOnInit(): void {
     this.getUserId();
-    this.route.paramMap.subscribe(params => {
-      const nickname = params.get('nickname');
-      if (nickname) {
-        this.cargarUsuarioPorNickname(nickname);
-
-      } else {
-        this.cargarUsuario();
-        
-      }
-      this.isAdmin();
-    });
     this.obtenerUrlActual();
   }
-  
 
   getUserId(): void {
     const userId = this.authService.getUserId();
     if (userId !== null) {
       this.idUsuario = parseInt(userId, 10);
+      // Obtener el nickname del usuario logeado si hay un usuario logeado
+      if (this.authService.isLoggedIn()) {
+        this.authService.getUserById(this.idUsuario).subscribe(
+          (data: Usuario) => {
+            this.nicknameLogeado = data.nickname;
+            // Suscribirse a los cambios de ruta después de obtener el nickname del usuario logeado
+            this.subscribeToRouteChanges();
+          },
+          (error: any) => {
+            console.error("Error al obtener los datos de usuario", error);
+          }
+        );
+      }
     } else {
       console.error('User ID is null');
     }
+  }
+
+  subscribeToRouteChanges(): void {
+    this.route.paramMap.subscribe(params => {
+      const nickname = params.get('nickname');
+      if (nickname) {
+        this.cargarUsuarioPorNickname(nickname);
+      } else {
+        this.cargarUsuario();
+      }
+      this.isAdmin();
+    });
   }
 
   cargarUsuario(): void {
@@ -59,6 +73,7 @@ export class PerfilComponent implements OnInit {
       this.authService.getUserById(this.idUsuario).subscribe(
         (data: Usuario) => {
           this.usuario = data;
+          this.esMiPerfil = this.nicknameLogeado === this.usuario.nickname;
         },
         (error: any) => {
           console.error("Error al obtener los datos de usuario", error);
@@ -71,6 +86,7 @@ export class PerfilComponent implements OnInit {
     this.authService.getUserByNickname(nickname).subscribe(
       (data: Usuario) => {
         this.usuario = data;
+        this.esMiPerfil = this.nicknameLogeado === nickname;
       },
       (error: any) => {
         console.error("Error al obtener los datos del usuario", error);
@@ -113,12 +129,10 @@ export class PerfilComponent implements OnInit {
     this.urlActual = this.router.url;
   }
 
-  // verificar si la ruta es /perfil/admin
   estaEnPerfilAdmin(): boolean {
     return this.urlActual === '/perfil/admin';
   }
 
-  //informe de usuarios
   async generaInformeUsuarios() {
     try {
       const usuarios = await this.usuarioService.obtenerTodosLosUsuarios().toPromise();
@@ -132,7 +146,6 @@ export class PerfilComponent implements OnInit {
         }));
 
         const wb = XLSX.utils.book_new();
-
         const ws = XLSX.utils.json_to_sheet(data);
 
         ws['!cols'] = [
@@ -148,9 +161,7 @@ export class PerfilComponent implements OnInit {
         XLSX.utils.book_append_sheet(wb, ws, 'Usuarios');
 
         const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-
         const blob = new Blob([wbout], { type: 'application/octet-stream' });
-
         const blobUrl = URL.createObjectURL(blob);
 
         const a = document.createElement('a');
@@ -165,14 +176,11 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  //informe de publicaciones
   async generaInformePublicaciones() {
     try {
-      // obtenemos publicaciones
       const publicaciones = await this.publicacionService.obtenerPublicaciones().toPromise();
 
       if (publicaciones) {
-        //datos a exportar
         const data = publicaciones.map(publicacion => ({
           Titulo: publicacion.titulo,
           Contenido: publicacion.contenido,
@@ -180,13 +188,9 @@ export class PerfilComponent implements OnInit {
           Usuario: publicacion.usuario.nickname
         }));
 
-        // crear excel
         const wb = XLSX.utils.book_new();
-
-        // crear hoja excel
         const ws = XLSX.utils.json_to_sheet(data);
 
-        // columnas
         ws['!cols'] = [
           { wch: 20 },
           { wch: 10 },
@@ -197,19 +201,11 @@ export class PerfilComponent implements OnInit {
         ws['C1'] = { v: 'Fecha', t: 's' };
         ws['E1'] = { v: 'Usuario', t: 's' };
 
-        // agrear a hoja
         XLSX.utils.book_append_sheet(wb, ws, 'Usuarios');
-
-        // pasar excel a binario
         const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-
-        // crear blob
         const blob = new Blob([wbout], { type: 'application/octet-stream' });
-
-        // url para blob
         const blobUrl = URL.createObjectURL(blob);
 
-        // descarga
         const a = document.createElement('a');
         a.href = blobUrl;
         a.download = 'informe_publicaciones.xlsx';
@@ -222,9 +218,6 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-
-  //lgica para manejar seguidos y seguidores 
-  
   obtenerSeguidos(usuario: Usuario): void {
     this.usuarioService.obtenerSeguidosPorUsuario(usuario.id)
       .subscribe(
@@ -239,7 +232,6 @@ export class PerfilComponent implements OnInit {
         }
       );
   }
-  
 
   obtenerSeguidores(usuario: Usuario): void {
     this.usuarioService.obtenerSeguidoresPorUsuario(usuario.id)
@@ -256,7 +248,7 @@ export class PerfilComponent implements OnInit {
       );
   }
 
-  obtenerPublicaciones(usuario:Usuario): void{
+  obtenerPublicaciones(usuario: Usuario): void {
     this.publicacionService.obtenerPublicacionesPorNickname(usuario.nickname)
       .subscribe(
         publicaciones => {
@@ -270,7 +262,29 @@ export class PerfilComponent implements OnInit {
         }
       );
   }
-  
-  
 
+  async eliminarUsuario(id: number) {
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Esta acción eliminará tu cuenta y no se podrá deshacer más tarde.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    });
+    if (result.isConfirmed) {
+      this.usuarioService.eliminarUsuario(id).subscribe({
+        next: () => {
+          console.log('Usuario con id ' + id + ' eliminado con exito');
+          this.authService.logout();
+          this.router.navigate(['main'])
+        },
+        error: (error) => {
+          console.log('Hubo un error al eliminar el usuario');
+        }
+      });
+    }
+  }
 }

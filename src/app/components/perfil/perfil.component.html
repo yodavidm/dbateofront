@@ -2,13 +2,14 @@
 
     <div class="profile-card">
 
+
         <!-- Cabecera del perfil -->
         <div class="profile-header text-center">
             <img src="../../../assets/images/perfilpic.jpg" alt="Avatar" class="avatar">
             <h1>{{ usuario.nickname }}</h1>
         </div>
 
-        
+
         <!-- Información del perfil -->
         <div class="profile-info text-center mt-3">
             <p><strong>Email:</strong> {{ usuario.email }}</p>
@@ -19,8 +20,8 @@
         <div class="profile-actions text-center mt-3">
             <button class="btn btn-primary mx-2" (click)="obtenerSeguidos(usuario)">Seguidos</button>
             <button class="btn btn-primary mx-2" (click)="obtenerSeguidores(usuario)">Seguidores</button>
-            <button class="btn btn-primary mx-2 mt-2 d-block custom"
-                (click)="obtenerPublicaciones(usuario)">Publicaciones</button>
+            <button class="btn btn-primary mx-2 mt-2 d-block custom" (click)="obtenerPublicaciones(usuario)">Publicaciones</button>
+            <button class="btn btn-outline-danger btn-md" *ngIf="esMiPerfil && !esAdmin" (click)="eliminarUsuario(idUsuario)">Eliminar cuenta</button>
         </div>
 
         <!-- Acciones de administración -->
@@ -30,5 +31,6 @@
             <button class="btn btn-dark mx-2" (click)="generaInformeUsuarios()">Informe Usuarios</button>
             <button class="btn btn-dark mx-2" (click)="generaInformePublicaciones()">Informe Publicaciones</button>
         </div>
+
     </div>
 </div>

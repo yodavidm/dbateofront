@@ -12,6 +12,8 @@ import { VerUsuariosComponent } from './components/ver-usuarios/ver-usuarios.com
 import { SeguidoresComponent } from './components/seguidores/seguidores.component';
 import { SeguidosComponent } from './components/seguidos/seguidos.component';
 import { UserPublicacionesComponent } from './components/user-publicaciones/user-publicaciones.component';
+import { NotificacionComponent } from './components/notificacion/notificacion.component';
+import { AuthGuard } from './auth-guard';
 
 
 const routes: Routes = [
@@ -22,13 +24,41 @@ const routes: Routes = [
   { path: 'publicacion/:idPublicacion/comentarios', component: ObtenerComentariosComponent },
   { path: 'publicacion/:idPublicacion/comentar', component: CrearComentarioComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'signIn', component:SigninComponent},
-  { path: 'registrado', component:RegistradoComponent},
-  { path: 'perfil/:nickname', component:PerfilComponent},
-  { path: 'perfil/admin/verUsuarios', component:VerUsuariosComponent},
-  { path: 'perfil/:nickname/seguidores', component: SeguidoresComponent },
-  { path: 'perfil/:nickname/seguidos', component: SeguidosComponent },
-  { path: 'perfil/:nickname/publicaciones', component: UserPublicacionesComponent },
+  { path: 'signIn', component: SigninComponent },
+  {
+    path: 'registrado', component: RegistradoComponent,
+    canMatch: [AuthGuard]
+  },
+  {
+    path: 'perfil/:nickname',
+    component: PerfilComponent,
+    canMatch: [AuthGuard]
+  },
+  {
+    path: 'perfil/admin/verUsuarios',
+    component: VerUsuariosComponent,
+    canMatch: [AuthGuard]
+  },
+  {
+    path: 'perfil/:nickname/seguidores',
+    component: SeguidoresComponent,
+    canMatch: [AuthGuard]
+  },
+  {
+    path: 'perfil/:nickname/seguidos',
+    component: SeguidosComponent,
+    canMatch: [AuthGuard]
+  },
+  {
+    path: 'perfil/:nickname/publicaciones',
+    component: UserPublicacionesComponent,
+    canMatch: [AuthGuard]
+  },
+  {
+    path: 'notificaciones/:nickname',
+    component: NotificacionComponent,
+    canMatch: [AuthGuard]
+  },
   { path: '**', redirectTo: "/main" },
 ];
 

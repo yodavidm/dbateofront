@@ -23,7 +23,7 @@ export class MainComponent implements OnInit {
     private usuarioService: UsuarioService
   ) { }
 
-  publicaciones!: Publicacion[];
+  publicaciones: Publicacion[] = [];
   public page!: number;
   usuario!: Usuario;
   esAdmin!: boolean;
@@ -31,6 +31,7 @@ export class MainComponent implements OnInit {
   hayPublicacionesCategoria!: boolean;
   seguidor: SeguidorDTO = { idSeguidor: 0, idSeguido: 0 };
   soyYo!:boolean;
+  busqueda!:string;
 
   ngOnInit(): void {
     this.getUserId();
@@ -231,6 +232,16 @@ export class MainComponent implements OnInit {
     );
   }
 
+    // Método para filtrar publicaciones por el término de búsqueda
+    filtrarPublicaciones(): Publicacion[] {
+      if (!this.busqueda) {
+        return this.publicaciones;
+      }
+      return this.publicaciones.filter(publicacion =>
+        publicacion.titulo.toLowerCase().includes(this.busqueda.toLowerCase()) ||
+        publicacion.contenido.toLowerCase().includes(this.busqueda.toLowerCase())
+      );
+    }
 
 
 }

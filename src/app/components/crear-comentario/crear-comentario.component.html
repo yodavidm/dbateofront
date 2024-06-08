@@ -10,7 +10,7 @@
                         <h5>Comentar:</h5>
                     </label>
                     <textarea class="form-control" id="comentario" name="comentario" required
-                        [(ngModel)]="comentarioDTO.comentario" #comentario="ngModel" maxlength="450" placeholder="Límite de 450 caracteres..."></textarea>
+                        [(ngModel)]="comentarioDTO.comentario" #comentario="ngModel" maxlength="255" placeholder="Límite de 255 caracteres..."></textarea>
                 </div>
                 <button type="submit" class="btn btn-warning btn-md" [disabled]="comentarioForm.invalid">Comentar</button>
             </form>

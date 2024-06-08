@@ -12,7 +12,7 @@
             <td class="col-id">{{usuario.id}}</td>
             <td>{{usuario.nickname}}</td>
             <td class="col-em">{{usuario.email}}</td>
-            <td><button class="btn btn-outline-danger btn-sm" (click)="eliminarUsuario(usuario.id)">Eliminar</button></td>
+            <td><button class="btn btn-outline-danger btn-sm" (click)="eliminarUsuario(usuario.id)" *ngIf="!siEsAdmin(usuario)">Eliminar</button></td>
         </tr>
     </tbody>
 </table>

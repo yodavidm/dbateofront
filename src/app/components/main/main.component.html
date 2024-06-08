@@ -60,9 +60,6 @@
               <a (click)="verComentarios(publicacion.id)" class="btn btn-warning btn-sm" style="margin-right: 20px;">Ver
                 comentarios</a>
 
-              <button style="color: grey;" class="btn" id="green"><i class="fa fa-thumbs-up fa-lg"
-                  aria-hidden="true"></i></button>
-
               <!--COMRPOBAR SI ES ADMIN-->
               <button *ngIf="isLoggedIn() && esAdmin" class="btn btn-outline-danger btn-sm"
                 (click)="eliminarPublicacion(publicacion.id)" style="float: right;">Eliminar</button>

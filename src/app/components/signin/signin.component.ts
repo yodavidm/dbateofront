@@ -58,8 +58,8 @@ export class SigninComponent {
               // Si el nickname y el email no existen, procede con el registro del usuario
               this.signInService.signin(this.registerDto).subscribe({
                 next: (response: any) => {
+                  this.toastr.success('Registrado con éxito. Ya puedes iniciar sesión con tu nueva cuenta.')
                   console.log("Usuario creado con éxito");
-                  this.router.navigate(['/registrado']);
                 },
                 error: error => {
                   console.error("Error al crear usuario ", error);

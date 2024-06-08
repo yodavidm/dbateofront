@@ -66,5 +66,13 @@ export class VerUsuariosComponent implements OnInit {
     }
   }
 
+  siEsAdmin(usuario:Usuario):boolean{
+    if(usuario.nickname==='admin'){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 
 }

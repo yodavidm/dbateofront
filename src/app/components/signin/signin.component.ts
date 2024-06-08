@@ -60,6 +60,7 @@ export class SigninComponent {
                 next: (response: any) => {
                   this.toastr.success('Registrado con éxito. Ya puedes iniciar sesión con tu nueva cuenta.')
                   console.log("Usuario creado con éxito");
+                  this.router.navigate(['/login']);
                 },
                 error: error => {
                   console.error("Error al crear usuario ", error);
